@@ -11,7 +11,7 @@ This project automatically mutes Spotify when ads are detected, using Rust and W
 Make sure you have the following installed:
 
 - Rust and Cargo
-- Windows 10 or higher
+- Windows 11
 - Spotify Desktop installed and running
 
 ### Clone the repository
