@@ -128,9 +128,9 @@ fn set_mute_for_pid(pid_target: u32, mute: bool) -> WinResult<()> {
                             println!(
                                 "{}",
                                 if mute {
-                                    "\x1b[31m🔇 Anuncio detectado\x1b[0m → muteando Spotify..."
+                                    "\x1b[31m[INFO] Anuncio detectado\x1b[0m → muteando Spotify..."
                                 } else {
-                                    "\x1b[32m🎵 Música normal\x1b[0m → desmuteando..."
+                                    "\x1b[32m[INFO] Música normal\x1b[0m → desmuteando..."
                                 }
                             )
                         }
