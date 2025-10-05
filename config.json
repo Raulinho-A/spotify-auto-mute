@@ -1,0 +1,6 @@
+{
+  "keywords": ["Advertisement"],
+  "scan_interval_active": 2,
+  "scan_interval_inactive": 30,
+  "show_logs": true
+}
