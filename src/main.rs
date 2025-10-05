@@ -261,6 +261,8 @@ fn main() -> WinResult<()> {
 
     let mut last_title = String::new();
 
+    let mut in_advert = false;
+
     loop {
         // Buscar Spotify solo si no tenemos PID válido
         if cached_pid.is_none() {
@@ -271,7 +273,7 @@ fn main() -> WinResult<()> {
                         .find(|pid| find_main_window_of_pid(*pid).is_some())
                 });
             sleep_duration = Duration::from_secs(30);
-        } else {
+        } else if !in_advert {
             sleep_duration = Duration::from_secs(2);
         }
 
@@ -285,8 +287,12 @@ fn main() -> WinResult<()> {
 
                         if title.contains(ADVERTISEMENT) {
                             set_mute_for_pid(pid, true)?;
+                            in_advert = true;
+                            sleep_duration = Duration::from_millis(300);
                         } else {
                             set_mute_for_pid(pid, false)?;
+                            in_advert = false;
+                            sleep_duration = Duration::from_secs(2);
                         }
 
                         last_title = title.clone();
@@ -296,11 +302,13 @@ fn main() -> WinResult<()> {
                 println!("Ventana cerrada. Spotify pudo cerrarse...");
                 cached_pid = None;
                 last_title.clear();
+                in_advert = false;
             }
         } else {
             println!("Spotify no está corriendo. Esperando...");
         }
 
+        // println!("Esperando {} ms...", sleep_duration.as_millis()); // debug sleep_duration
         thread::sleep(sleep_duration);
 
     }
